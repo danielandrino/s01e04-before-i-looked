@@ -14,12 +14,12 @@ in a shell this agent can run.
 2. Draft the split as a table: title · plan section · scope · done when · blocked by.
    One issue per unit of work.
 3. **Stop and show the table to the human.** Publish nothing until they approve it.
-4. Ask the human what every issue here must carry (fields, labels, wording), unless it is
-   already written down in this session or in the repo.
+4. Every issue carries the shape in "What every issue carries" below. Ask the human only
+   about what it doesn't cover.
 5. Create each issue in dependency order, so blocked-by can cite real numbers:
 
    ```sh
-   gh issue create --title "<title>" --body-file <tmp.md>
+   gh issue create --title "<title>" --label plan:<plan> --body-file <tmp.md>
    ```
 
 6. Record every issue URL from gh's output (not from memory) and reply with the list.
@@ -29,6 +29,29 @@ Closing one, with the closing comment from AGENTS.md:
 ```sh
 gh issue close <n> -c "<closing comment>"
 ```
+
+## What every issue carries
+
+Agreed with the human on the morning-digest plan (2026-11-01). The label is `plan:<plan>`,
+from the plan's frontmatter (`plan: morning-digest` → `plan:morning-digest`); create it once
+if the repo lacks it. The body opens with the source line, which the reviewer sorts by:
+
+```md
+Source: plan.md § <n>
+
+## Scope
+<what to build, from the plan section; constraints that bind it>
+
+## Done when
+<the section's done condition, checkable>
+
+## Blocked by
+<#n, or —. When the issue can start before its done condition can hold, say both:
+"#1 (to start). Done when also needs #2.">
+```
+
+One plan section can be several issues when part of it unblocks others (§ 1 of
+morning-digest: types first, reader second). Each keeps the same `Source:` line.
 
 ## No `gh`
 
