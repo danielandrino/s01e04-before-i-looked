@@ -68,7 +68,7 @@ describe('GET /digest/:night (page)', () => {
     const res = await makeApp().request(`/digest/${NORMAL}`);
     const html = await res.text();
     expect(res.status).toBe(200);
-    expect(html).toContain("didn't parse");
+    expect(html).toMatch(/didn(&#39;|')t parse/); // hono escapes the apostrophe
   });
 });
 

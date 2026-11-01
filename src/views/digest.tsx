@@ -40,7 +40,7 @@ export function DigestPage({ night }: { night: Night }) {
       )}
       {night.badLines > 0 && (
         <p class="mute">
-          {night.badLines} {night.badLines === 1 ? "line didn't" : "lines didn't"} parse
+          {night.badLines} {night.badLines === 1 ? 'line' : 'lines'} didn't parse
         </p>
       )}
     </>
